@@ -91,10 +91,11 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.ekram"
@@ -147,4 +148,10 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.0'
+    }
 }
